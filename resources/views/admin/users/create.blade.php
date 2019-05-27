@@ -9,9 +9,10 @@
 
 <div class="col-sm-9">
 
-    <form method="post" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <form method="post" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
+        @csrf
+        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
 
     <label for="name">Name</label>
     <input type="text" name="name" class="form-control" placeholder="Enter name">

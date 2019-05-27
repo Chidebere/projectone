@@ -20,13 +20,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/admin', function(){
 
-    return view('admin.index');
-});
+Route::group(['middleware'=>'admin'], function(){
+
+    Route::get('/admin', function(){
+        return view('admin.index');
+    });
 
 
-//Route::resource('/admin/users', 'AdminUserController');
+//Route::resource('/admin/users', 'AdminUserController');  //if used, remove admin from all route links
 
 Route::resource('/admin/users', 'AdminUserController',['names'=>[
 
@@ -34,25 +36,33 @@ Route::resource('/admin/users', 'AdminUserController',['names'=>[
     'create'=>'admin.users.create',
     'store'=>'admin.users.store',
     'edit'=>'admin.users.edit',
-    'update'=>'admin.users.update'
+    'update'=>'admin.users.update',
+    'destroy'=>'admin.users.destroy'
 
 ]]);
 
 
-Route::resource('/admin/posts', 'AdminPostsController',['names'=>[
 
-    'index'=>'admin.posts.index',
-    'create'=>'admin.posts.create',
-    'store'=>'admin.posts.store',
-    'edit'=>'admin.posts.edit'
 
-]]);
+// Route::resource('/admin/posts', 'AdminPostsController',['names'=>[
 
-Route::resource('/admin/categories', 'AdminCategoriesController',['names'=>[
+//     'index'=>'admin.posts.index',
+//     'create'=>'admin.posts.create',
+//     'store'=>'admin.posts.store',
+//     'edit'=>'admin.posts.edit'
 
-    'index'=>'admin.categories.index',
-    'create'=>'admin.categories.create',
-    'store'=>'admin.categories.store',
-    'edit'=>'admin.categories.edit'
+// ]]);
 
-]]);
+// Route::resource('/admin/categories', 'AdminCategoriesController',['names'=>[
+
+//     'index'=>'admin.categories.index',
+//     'create'=>'admin.categories.create',
+//     'store'=>'admin.categories.store',
+//     'edit'=>'admin.categories.edit'
+
+// ]]);
+
+
+});
+
+

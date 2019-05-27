@@ -66,14 +66,26 @@
 
 					<!-- User Menu -->
 					<div class="user-menu">
-						<div class="user-name"><span><img src="{{url('images/dashboard-avatar.webp')}}"></span>Chidiebere Ezeka</div>
+						<div class="user-name"><span>
+                            <img src="{{ Auth::user()->photo ? Auth::user()->photo->file : '/images/no-picture.png'}}"></span>{{ Auth::user()->name }} </div>
 						<ul>
-
 
                             <li><a href="/users/profile"><i class="fa fa-user"></i> My Profile</a></li>
 
-							<li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-						</ul>
+                                            <a class="" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                               document.getElementById('logout-form').submit();">
+                                               <i class="fa fa-sign-out fa-fw"></i>
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+
+							{{-- <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li> --}}
+
+                        </ul>
 					</div>
 
 					<a href="/posts/create" class="button border with-icon">Create Post <i class="sl sl-icon-plus"></i></a>
@@ -104,7 +116,7 @@
 		<div class="dashboard-nav-inner">
 
 			<ul data-submenu-title="Main">
-            <li class="active"><a href="{{route('admin.users.index')}}"><i class="im im-icon-Pantheon"></i> Dashboard</a></li>
+            <li class="active"><a href="/admin"><i class="im im-icon-Pantheon"></i> Dashboard</a></li>
 
 			</ul>
 

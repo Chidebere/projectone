@@ -55,9 +55,47 @@
 <input type="file" name="photo_id" class="form-control">
 
 
-<input type="submit" class="btn btn-primary" value="Create">
+<input type="submit" class="btn btn-primary" value="Update">
 
 </form>
+
+
+{{-- {{ Form::open(array('method' => 'Delete', 'route' => array('users.destroy', $user->id), 'class' => 'delete-form')) }}
+	<button class="btn btn-danger"><i class="fa fa-pencil"></i> Delete</button>
+{{ Form::close() }} --}}
+
+
+{{-- {!! Form::open(['method'=>'DELETE', 'action'=> ['AdminUserController@destroy', $user->id]]) !!}
+<div class="form-group">
+   {!! Form::submit('Delete user', ['class'=>'btn btn-danger col-sm-6']) !!}
+</div>
+{!! Form::close() !!} --}}
+
+
+<form method="post" action="{{route('admin.users.destroy', ['id' => $user->id])}}">
+  {{ csrf_field() }}
+        {!! method_field('DELETE') !!}
+        <input type="submit" class="btn btn-danger" value="Delete User">
+</form>
+
+{{-- <form method="post" action="/admin/users/{{$user->id}}"> --}}
+    {{-- <form action="{{ url('/admin/users', ['id' => $user->id]) }}" method="post">
+    {{ csrf_field() }} --}}
+    {{-- <form action="{{route('users.destroy',[$user->id])}}" method="POST">
+        @method('DELETE')
+        @csrf --}}
+        {{-- <form method="post" action="{{ route('users.destroy',[$user->id]) }}"> --}}
+    {{-- <form method="post" action="{{ route('users.destroy',['id' => $user->id]) }}"> --}}
+
+
+        {{-- <form action="{{url('admin/users', ['id' => $user->id])}}" method="post">
+            {{ csrf_field() }}
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="text" name="someName" value="POKA" />
+         <input type="submit" value="Delete">
+    </form> --}}
+
+
 
 </div>
 
